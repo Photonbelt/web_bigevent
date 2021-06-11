@@ -1,0 +1,60 @@
+/* 导航区 */
+.layui-nav-item a {
+	transition: none!important;
+}
+.layui-layout-right a,
+.icon-tuichu {
+	font-size: 13px!important;
+}
+.iconfont {
+	margin-right: 8px;
+}
+.layui-icon-app {
+	margin: 0 8px 0 20px;
+}
+.layui-nav-img {
+	display: none;
+}
+div.userInfo {
+	width: 200px;
+	border-bottom: 1px solid #23262E;
+	line-height: 60px;
+	text-align: center;
+	font-size: 12px;
+	user-select: none;
+}
+div.userInfo .layui-nav-img,
+div.userInfo .text-avatar {
+	margin-right: 20px;
+}
+.text-avatar {
+	display: none;
+	position: relative;
+	top: 2px;
+	width: 30px;
+	height: 30px;
+	margin-right: 10px;
+	border-radius: 50%;
+	background-color: #009688;
+	line-height: 32px;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+}
+#uname {
+	margin-left: 10px;
+}
+/* 内容区 */
+.layui-body {
+	overflow: hidden;
+}
+iframe {
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+/* 底部固定区域 */
+.layui-footer {
+	text-align: center;
+	font-size: 12px;
+}
