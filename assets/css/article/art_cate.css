@@ -1,0 +1,15 @@
+body {
+	padding: 15px;
+}
+.layui-card-header {
+	position: relative;
+}
+.layui-card-header button {
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.layui-form {
+	padding: 20px 35px 0 0;
+}

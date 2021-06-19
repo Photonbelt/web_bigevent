@@ -1,0 +1,71 @@
+$(function () {
+	var layer = layui.layer;
+	var form = layui.form;
+
+	// 渲染文本编辑器
+	initEditor();
+
+	// 初始化文章类别下拉列表
+	$.ajax({
+		method: 'GET',
+		url: '/my/article/cates',
+		success: function (res) {
+			if (res.status !== 0) return layer.msg(res.message);
+			var htmlStr = template('tpl-cate', res);
+			$('select').html(htmlStr);
+			form.render();
+		}
+	})
+
+	// 生成封面裁剪模块
+	var options = {
+		aspectRatio: 400 / 280,
+		preview: '.img-preview'
+	}
+	$('#image').cropper(options)
+
+	// 点击“选择封面”按钮
+	$('#btnCover').on('click', function () {
+		$('.file').click();
+	})
+	// 根据选择的图片重新渲染裁剪模块
+	$('.file').on('change', function () {
+		if ($(this)[0].files.length <= 0) return;
+		var imgURL = URL.createObjectURL($(this)[0].files[0]);
+		$('#image').cropper('destroy')
+			.prop('src', imgURL)
+			.cropper(options);
+	})
+
+	// 点击“存为草稿”时修改文章发表状态
+	var state = '已发布';
+	$('#saveDraft').on('click', function () {
+		state = '草稿';
+	})
+	// 监听表单提交事件
+	$('.layui-form').on('submit', function (e) {
+		e.preventDefault();
+		var fd = new FormData($(this)[0]);
+		$('#image')
+			.cropper('getCroppedCanvas', {
+				width: 400,
+				height: 280
+			})
+			.toBlob(function (blob) {
+				fd.append('cover_img', blob);
+				fd.append('state', state);
+				$.ajax({
+					method: 'POST',
+					url: '/my/article/add',
+					data: fd,
+					contentType: false,
+					processData: false,
+					success: function (res) {
+						if (res.status !== 0) return layer.msg(res.message);
+						layer.msg('发表成功！');
+						location.href = '/article/art_list.html';
+					}
+				})
+			});
+	})
+})

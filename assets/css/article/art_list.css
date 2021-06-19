@@ -1,0 +1,32 @@
+body {
+	padding: 15px;
+}
+.layui-form {
+	margin-bottom: 20px;
+}
+.layui-form .layui-btn+.layui-btn {
+	margin-left: 0;
+}
+.link-title {
+	color: #2440b3;
+}
+/* 预览文章内容区 */
+.preview-box {
+	padding: 20px;
+}
+.pre-title {
+	text-align: center;
+}
+.pre-info {
+    margin: 20px 0;
+	font-size: 12px;
+    color: gray;
+}
+.pre-info span {
+	margin-right: 20px;
+}
+.pre-cover {
+	width: 400px;
+    height: 280px;
+    margin: 15px 0;
+}

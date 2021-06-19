@@ -4,7 +4,8 @@ $.ajaxPrefilter(function (options) {
 		options.complete = function (res) {
 			if (res.responseJSON.status === 1 && res.responseJSON.message === '身份认证失败！') {
 				localStorage.removeItem('token');
-				location.href = '/login.html';
+				if (frames.length > 0) return location.href = '/login.html';
+				parent.location.href = '/login.html';
 			}
 		}
 	}

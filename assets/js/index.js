@@ -33,16 +33,22 @@ $(function () {
 
 	// 为头部个人中心下拉列表绑定点击事件
 	$('#userSelect').on('click', 'dd', function () {
-		$('#userList').parent().addClass('layui-nav-itemed');
+		if (!$('#userList').parent().hasClass('layui-nav-itemed')) {
+			$('#userList').siblings('a')[0].click();
+		}
 		$('#userList dd:eq(' + $(this).index() + ') a').get(0).click();
 	})
 	// 为左侧个人中心列表绑定点击事件
 	$('#userList').on('click', 'dd', function () {
 		$('#userSelect dd').eq($(this).index()).addClass('layui-this').siblings().removeClass();
 	})
-	// iframe跳转到其他页面时，去除个人中心下拉列表的选中状态
+	// 监听iframe页面加载事件
 	$('iframe').on('load', function () {
-		if (frames[0].location.href.indexOf('/user/') === -1) $('#userSelect dd').removeClass();
+		var href = frames[0].location.href;
+		// 非个人中心页面，去除个人中心下拉列表的选中状态
+		if (href.indexOf('/user/') === -1) $('#userSelect dd').removeClass();
+		// 跳转到文章列表页时，选中导航相应的标签
+		if (href.indexOf('/art_list.html') !== -1) $('#articleList dd:eq(1)').addClass('layui-this').siblings().removeClass();
 	})
 
 	renderUserInfo();

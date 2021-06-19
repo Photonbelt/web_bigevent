@@ -14,7 +14,7 @@ $(function () {
 			url: '/my/userinfo',
 			success: function (res) {
 				if (res.status !== 0) return layer.msg(res.message);
-				form.val('md-form', res.data);
+				form.val('form-userInfo', res.data);
 			}
 		})
 	}
